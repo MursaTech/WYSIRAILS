@@ -1,4 +1,6 @@
 WYSIRAILS::Application.routes.draw do
+  resources :models
+
   resources :apps
 
   root :to => "home#index"
