@@ -28,6 +28,9 @@ class AppsController < ApplicationController
 
     respond_to do |format|
       if @app.save
+        # system "cd ~/Projects; rails new #{@app.name}"
+        # exec "cd ~/Projects; rails new #{@app.name}"
+        `cd ~/Projects; rails new #{@app.name}`
         format.html { redirect_to @app, notice: 'App was successfully created.' }
         format.json { render action: 'show', status: :created, location: @app }
       else
