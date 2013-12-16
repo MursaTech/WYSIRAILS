@@ -25,11 +25,14 @@ class ModelsController < ApplicationController
   # POST /models.json
   def create
     @model = Model.new(model_params)
+    app = App.find(current_app.id)
+    @model.app_id = app.id
 
     respond_to do |format|
       if @model.save
         format.html { redirect_to @model, notice: 'Model was successfully created.' }
         format.json { render action: 'show', status: :created, location: @model }
+        `cd ~/Projects/@app.name; rails g scaffold #{@model.name}`
       else
         format.html { render action: 'new' }
         format.json { render json: @model.errors, status: :unprocessable_entity }
